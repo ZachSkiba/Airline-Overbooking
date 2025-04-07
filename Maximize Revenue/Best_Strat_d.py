@@ -11,7 +11,7 @@ seats_per_flight = 200  # Seats per flight
 no_show_rate = 0.04  # No-show rate
 num_simulations = 1000  # Number of Monte Carlo trials
 
-compensation_per_passenger = 1020  # Compensation for bumped passengers
+compensation_per_passenger = 1793.52  # Compensation for bumped passengers
 
 
 economy_price = 400
@@ -43,8 +43,9 @@ def run_simulation(booked_per_flight, seats, economy_tickets, business_tickets, 
         revenue = total_revenue
         compensation_cost = compensation_per_passenger * total_overbooked_passengers
         net_revenue = revenue - compensation_cost
+        net_revenue_per_flight = net_revenue / num_flights
 
-        net_revenues.append(net_revenue)
+        net_revenues.append(net_revenue_per_flight)
 
     return np.mean(net_revenues), np.mean(overbooked)
 
@@ -62,8 +63,9 @@ def simulate_domestic_flights(models):
     
         # Extra overbooked seats allocation
         extra_seats = booked_per_flight - seats
-        extra_economy = int(0.75 * extra_seats)
-        extra_business = int(0.25 * extra_seats)
+        extra_business = int(0.10 * extra_seats)
+        extra_economy = int(0.90 * extra_seats)
+        
         extra_first = 0 
         
         economy_tickets = base_economy + extra_economy
@@ -110,8 +112,9 @@ def simulate_booking_levels(booking_levels):
     
         # Extra overbooked seats allocation
         extra_seats = booked_per_flight - seats_per_flight
-        extra_economy = int(0.75 * extra_seats)
-        extra_business = int(0.25 * extra_seats)
+        extra_business = int(0.10 * extra_seats)
+        extra_economy = int(0.90 * extra_seats)
+        
         extra_first = 0 
         
         economy_tickets = base_economy + extra_economy
@@ -140,7 +143,7 @@ def simulate_booking_levels(booking_levels):
 
     ax.annotate(f"${best_revenue:,.2f}",
                 xy=(best_booking_level, best_revenue), color= 'red',
-                xytext=(best_booking_level + 1, best_revenue + 1.02))
+                xytext=(best_booking_level + 1, best_revenue + 400))
 
     # Highlight points from domestic_models
     strategy_points = {
@@ -170,12 +173,12 @@ def simulate_booking_levels(booking_levels):
 # Define models and booking levels
 domestic_models = {
     "Conservative(0%)": {"seats": 200, "sold": 200, "economy": 170, "business": 20, "first": 10},
-    "Moderate(3%)": {"seats": 200, "sold": 206, "economy": 174, "business": 22, "first": 10},
-    "Aggressive(5%)": {"seats": 200, "sold": 210, "economy": 178, "business": 22, "first": 10},
-    "Extra Aggressive(10%)": {"seats": 200, "sold": 220, "economy": 185, "business": 25, "first": 10},
+    "Moderate(3%)": {"seats": 200, "sold": 206, "economy": 176, "business": 20, "first": 10},
+    "Aggressive(5%)": {"seats": 200, "sold": 210, "economy": 179, "business": 21, "first": 10},
+    "Extra Aggressive(10%)": {"seats": 200, "sold": 220, "economy": 188, "business": 22, "first": 10},
 }
 
-booking_levels = range(200, 230)
+booking_levels = range(195, 230)
 
 # Run both simulations
 simulate_domestic_flights(domestic_models)  # Domestic overbooking strategy simulation

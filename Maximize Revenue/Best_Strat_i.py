@@ -11,7 +11,7 @@ seats_per_flight = 400  # Seats per flight
 no_show_rate = 0.075  # No-show rate
 num_simulations = 1000  # Number of Monte Carlo trials
 
-compensation_per_passenger = 3082.50  # Compensation for bumped passengers
+compensation_per_passenger = 5936.91  # Compensation for bumped passengers
 
 
 economy_price = 1200
@@ -43,8 +43,9 @@ def run_simulation(booked_per_flight, seats, economy_tickets, business_tickets, 
         revenue = total_revenue
         compensation_cost = compensation_per_passenger * total_overbooked_passengers
         net_revenue = revenue - compensation_cost
+        net_revenue_per_flight = net_revenue / num_flights
 
-        net_revenues.append(net_revenue)
+        net_revenues.append(net_revenue_per_flight)
 
     return np.mean(net_revenues), np.mean(overbooked)
 
@@ -97,8 +98,8 @@ def simulate_booking_levels(booking_levels):
         base_first = int(0.025 * seats_per_flight)
         
         extra_seats = booked_per_flight - seats_per_flight
-        extra_economy = int(0.75 * extra_seats)
-        extra_business = int(0.25 * extra_seats)
+        extra_economy = int(0.90 * extra_seats)
+        extra_business = int(0.10 * extra_seats)
         extra_first = 0  # No extra first-class seats
         
         economy_tickets = base_economy + extra_economy
@@ -159,12 +160,12 @@ def simulate_booking_levels(booking_levels):
 # Define models and booking levels
 international_models = {
     "Conservative(0%)": {"seats": 400, "sold": 400, "economy": 360, "business": 30, "first": 10},
-    "Moderate(5%)": {"seats": 400, "sold": 420, "economy": 375, "business": 35, "first": 10},
-    "Aggressive(10%)": {"seats": 400, "sold": 440, "economy": 390, "business": 40, "first": 10},
-    "Extra Aggressive(15%)": {"seats": 400, "sold": 460, "economy": 405, "business": 45, "first": 10},
+    "Moderate(5%)": {"seats": 400, "sold": 420, "economy": 378, "business": 32, "first": 10},
+    "Aggressive(10%)": {"seats": 400, "sold": 440, "economy": 396, "business": 34, "first": 10},
+    "Extra Aggressive(15%)": {"seats": 400, "sold": 460, "economy": 414, "business": 36, "first": 10},
 }
 
-booking_levels = range(400, 461)
+booking_levels = range(395, 465)
 
 # Run both simulations
 simulate_international_flights(international_models)  # International overbooking strategy simulation
