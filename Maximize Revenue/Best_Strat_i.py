@@ -14,7 +14,7 @@ num_simulations = 1000  # Number of Monte Carlo trials
 compensation_per_passenger = 5936.91  # Compensation for bumped passengers
 
 
-economy_price = 1200
+economy_price = 600     #two-way ticket price / 2
 business_price = 4 * economy_price
 first_price = 6 * economy_price
 
@@ -128,7 +128,7 @@ def simulate_booking_levels(booking_levels):
 
     ax.annotate(f"${best_revenue:,.2f}",
                 xy=(best_booking_level, best_revenue), color= 'red',
-                xytext=(best_booking_level + 1, best_revenue + 1.02))
+                xytext=(best_booking_level + 1, best_revenue + 1200))
 
     # Highlight points from international_models
     strategy_points = {

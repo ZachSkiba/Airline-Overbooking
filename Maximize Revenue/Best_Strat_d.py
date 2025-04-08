@@ -14,7 +14,7 @@ num_simulations = 1000  # Number of Monte Carlo trials
 compensation_per_passenger = 1793.52  # Compensation for bumped passengers
 
 
-economy_price = 400
+economy_price = 200   #two-way ticket price / 2
 business_price = 4 * economy_price
 first_price = 6 * economy_price
 
