@@ -11,7 +11,7 @@ seats_per_flight = 200  # Seats per flight
 no_show_rate = 0.04  # No-show rate
 num_simulations = 1000  # Number of Monte Carlo trials
 
-compensation_per_passenger = 1793.52  # Compensation for bumped passengers
+compensation_per_passenger = 1793.52  # Compensation for bumped passengers, 1793.52
 
 
 economy_price = 200   #two-way ticket price / 2
