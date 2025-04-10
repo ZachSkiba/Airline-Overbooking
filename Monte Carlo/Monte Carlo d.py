@@ -8,10 +8,11 @@ num_simulations = 1000  # Number of Monte Carlo trials
 
 # Different overbooking strategies
 booking_levels = {
-    "Conservative": 200,  # 0% overbooking
-    "Moderate": 206,      # 3% overbooking
-    "Aggressive": 210,    # 5% overbooking
-    "Extra Aggressive": 220  # 10% overbooking
+    "Conservative(0%)": 200,  # 0% overbooking
+    "Moderate(3%)": 206,      # 3% overbooking
+    "Aggressive(5%)": 210,    # 5% overbooking
+    "Extra Aggressive(10%)": 220,  # 10% overbooking
+    "Optimal Overbooking(2.5%)": 205
 }
 
 
