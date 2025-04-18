@@ -1,8 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-# 
-# Set Seaborn style
+
 sns.set_theme(style="whitegrid")
 
 # Simulation parameters
@@ -11,14 +10,14 @@ seats_per_flight = 200  # Seats per flight
 no_show_rate = 0.04  # No-show rate
 num_simulations = 1000  # Number of Monte Carlo trials
 
-compensation_per_passenger = 1793.52  # Compensation for bumped passengers, 1793.52
+compensation_per_passenger = 1793.52  # Compensation for bumped passengers
 
 
 economy_price = 200   #two-way ticket price / 2
 business_price = 4 * economy_price
 first_price = 6 * economy_price
 
-# Helper function to simulate revenue for either scenario
+#simulate revenue for either scenario
 def run_simulation(booked_per_flight, seats, economy_tickets, business_tickets, first_tickets):
     net_revenues = []
     
@@ -39,7 +38,7 @@ def run_simulation(booked_per_flight, seats, economy_tickets, business_tickets, 
         first_revenue = first_tickets * first_price * num_flights
         total_revenue = economy_revenue + business_revenue + first_revenue
 
-        # Total revenue and compensation costs
+        # Total revenue
         revenue = total_revenue
         compensation_cost = compensation_per_passenger * total_overbooked_passengers
         net_revenue = revenue - compensation_cost
@@ -49,7 +48,7 @@ def run_simulation(booked_per_flight, seats, economy_tickets, business_tickets, 
 
     return np.mean(net_revenues), np.mean(overbooked)
 
-# Simulation for domestic Flight Strategies
+# Simulation for domestic flights for each model
 def simulate_domestic_flights(models):
     results = {}
     
@@ -61,7 +60,7 @@ def simulate_domestic_flights(models):
         base_business = int(0.1 * seats)
         base_first = int(0.05 * seats)
     
-        # Extra overbooked seats allocation
+        # extra overbooked seats allocation
         extra_seats = booked_per_flight - seats
         extra_business = int(0.10 * extra_seats)
         extra_economy = int(0.90 * extra_seats)
@@ -75,7 +74,7 @@ def simulate_domestic_flights(models):
         avg_net_revenue, _ = run_simulation(booked_per_flight, seats, economy_tickets, business_tickets, first_tickets)
         results[strategy] = avg_net_revenue
 
-    # Plot Domestic Flight Results
+    # Plot flight results
     fig, ax = plt.subplots(figsize=(10, 7))
     strategies = list(results.keys())
     revenues = list(results.values())
@@ -91,7 +90,6 @@ def simulate_domestic_flights(models):
     plt.grid(axis='y', linestyle='--', alpha=0.7)
     plt.tight_layout()
     
-    # Print Results
     print()
     for strategy, revenue in results.items():
         print(f"{strategy}: ${revenue:,.2f}")
@@ -115,8 +113,9 @@ def simulate_booking_levels(booking_levels):
         extra_business = int(0.10 * extra_seats)
         extra_economy = int(0.90 * extra_seats)
         
-        extra_first = 0 
+        extra_first = 0 # No extra first-class seats
         
+        # Ticket revenue
         economy_tickets = base_economy + extra_economy
         business_tickets = base_business + extra_business
         first_tickets = base_first + extra_first
@@ -145,7 +144,7 @@ def simulate_booking_levels(booking_levels):
                 xy=(best_booking_level, best_revenue), color= 'red',
                 xytext=(best_booking_level + 1, best_revenue + 400))
 
-    # Highlight points from domestic_models
+    # Different points on graph
     strategy_points = {
         "Conservative(0%)": 200,
         "Moderate(3%)": 206,
@@ -170,6 +169,7 @@ def simulate_booking_levels(booking_levels):
 
     print(f"\nOptimal overbooking level: {best_booking_level} passengers per flight ({best_booking_percentage}% overbooked) with the revenue being ${best_revenue:,.2f}\n")
     plt.show()
+    
 # Define models and booking levels
 domestic_models = {
     "Conservative(0%)": {"seats": 200, "sold": 200, "economy": 170, "business": 20, "first": 10},
@@ -180,6 +180,6 @@ domestic_models = {
 
 booking_levels = range(195, 230)
 
-# Run both simulations
+# Run simulations
 simulate_domestic_flights(domestic_models)  # Domestic overbooking strategy simulation
 simulate_booking_levels(booking_levels)  # Booking level optimization simulation

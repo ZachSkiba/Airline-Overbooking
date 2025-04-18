@@ -2,7 +2,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# Set Seaborn style
 sns.set_theme(style="whitegrid")
 
 # Simulation parameters
@@ -18,7 +17,7 @@ economy_price = 600     #two-way ticket price / 2
 business_price = 4 * economy_price
 first_price = 6 * economy_price
 
-# Helper function to simulate revenue for either scenario
+# simulate revenue for either scenario
 def run_simulation(booked_per_flight, seats, economy_tickets, business_tickets, first_tickets):
     net_revenues = []
     
@@ -39,7 +38,7 @@ def run_simulation(booked_per_flight, seats, economy_tickets, business_tickets, 
         first_revenue = first_tickets * first_price * num_flights
         total_revenue = economy_revenue + business_revenue + first_revenue
 
-        # Total revenue and compensation costs
+        # Total revenue 
         revenue = total_revenue
         compensation_cost = compensation_per_passenger * total_overbooked_passengers
         net_revenue = revenue - compensation_cost
@@ -49,7 +48,7 @@ def run_simulation(booked_per_flight, seats, economy_tickets, business_tickets, 
 
     return np.mean(net_revenues), np.mean(overbooked)
 
-# Simulation for International Flight Strategies
+# Simulation for International flights for each model
 def simulate_international_flights(models):
     results = {}
     
@@ -63,7 +62,7 @@ def simulate_international_flights(models):
         avg_net_revenue, _ = run_simulation(booked_per_flight, seats, economy_tickets, business_tickets, first_tickets)
         results[strategy] = avg_net_revenue
 
-    # Plot International Flight Results
+    # Plot results
     fig, ax = plt.subplots(figsize=(10, 7))
     strategies = list(results.keys())
     revenues = list(results.values())
@@ -79,7 +78,6 @@ def simulate_international_flights(models):
     plt.grid(axis='y', linestyle='--', alpha=0.7)
     plt.tight_layout()
     
-    # Print Results
     print()
     for strategy, revenue in results.items():
         print(f"{strategy}: ${revenue:,.2f}")
@@ -93,15 +91,19 @@ def simulate_booking_levels(booking_levels):
     results = {}
 
     for booked_per_flight in booking_levels:
+        # Base seat allocation before overbooking
         base_economy = int(0.90 * seats_per_flight)
         base_business = int(0.075 * seats_per_flight)
         base_first = int(0.025 * seats_per_flight)
         
+        # Extra overbooked seats allocation
         extra_seats = booked_per_flight - seats_per_flight
         extra_economy = int(0.90 * extra_seats)
         extra_business = int(0.10 * extra_seats)
+
         extra_first = 0  # No extra first-class seats
         
+        #Ticket Revenue
         economy_tickets = base_economy + extra_economy
         business_tickets = base_business + extra_business
         first_tickets = base_first + extra_first
@@ -130,7 +132,7 @@ def simulate_booking_levels(booking_levels):
                 xy=(best_booking_level, best_revenue), color= 'red',
                 xytext=(best_booking_level + 1, best_revenue + 1200))
 
-    # Highlight points from international_models
+    # Different points on graph
     strategy_points = {
         "Conservative(0%)": 400,
         "Moderate(5%)": 420,

@@ -12,14 +12,14 @@ booking_levels = {
     "Moderate(3%)": 206,      # 3% overbooking
     "Aggressive(5%)": 210,    # 5% overbooking
     "Extra Aggressive(10%)": 220,  # 10% overbooking
-    "Optimal Overbooking(2.5%)": 205
+    "Optimal Overbooking(2.5%)": 205  #Based on maximizing revenue in Max_Revenue code
 }
 
 
 lower_bound, upper_bound = .05, .15
 
 
-# Store results for each strategy
+
 results = {}
 
 for strategy, booked_per_flight in booking_levels.items():
@@ -36,13 +36,9 @@ for strategy, booked_per_flight in booking_levels.items():
         
         overbooked_passengers_per_day.append(total_overbooked)
     
-    # Convert list to NumPy array
+    #calculate total pssangers andd overbooking rate per passanger
     overbooked_passengers_per_day = np.array(overbooked_passengers_per_day)
-    
-    # Total passengers per day
     total_passengers_per_day = num_flights * booked_per_flight
-    
-    # Overbooking rate per passenger
     overbooking_rate_per_passenger = overbooked_passengers_per_day / total_passengers_per_day * 100
     
     # Calculate probabilities
@@ -75,7 +71,7 @@ for strategy, booked_per_flight in booking_levels.items():
     f"\nOverbooking likelihood": f"1 in {one_in_x_passengers} passengers get overbooked." if one_in_x_passengers else "No overbookings"
 }
 
-# Print results
+#results
 for strategy, result in results.items():
     print(f"\n{strategy} Strategy:")
     for key, value in result.items():
