@@ -48,7 +48,7 @@ This project analyzes airline overbooking strategies to maximize revenue while c
 ## Code & Implementation
 
 The analysis was performed using Python, using libraries such as NumPy, Pandas, and Matplotlib for simulation, data handling, and visualization. Key code components include:
-* Compensation cost simulation (Short-term & Long-term/Loyalty Loss) 
+* Compensation cost simulation (Long-term/Loyalty Loss) 
 * Monte Carlo simulation for revenue modeling under different strategies
 * Revenue maximization analysis to find optimal booking levels 
 * Sensitivity analysis for no-show rates and compensation costs
