@@ -1,5 +1,5 @@
 # Airline Overbooking Analysis & Revenue Maximization
- Collaborator: Jake Skiba  @JakeSkiba16
+**Collaborator:** Jake Skiba [@JakeSkiba16](https://github.com/JakeSkiba16)
  
 ## Project Summary
 
