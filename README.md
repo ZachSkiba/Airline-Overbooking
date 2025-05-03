@@ -54,7 +54,6 @@ The analysis was performed using Python, using libraries such as NumPy, Pandas, 
 * Sensitivity analysis for no-show rates and compensation costs
 * Profitability analysis plotting profit per passenger against costs
 
-*(Note: View full code above)*
 
 ## Assumptions & Limitations
 
