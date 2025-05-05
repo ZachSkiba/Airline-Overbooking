@@ -1,7 +1,7 @@
 # Airline Overbooking Analysis & Revenue Maximization
 **Collaborator:** Jake Skiba [@JakeSkiba16](https://github.com/JakeSkiba16)
 
-**Supervisor:** [Hemanshu Kaul](https://www.iit.edu/directory/people/hemanshu-kaul) PHD Mathemtaics 
+**Supervisor:** [Hemanshu Kaul](https://www.iit.edu/directory/people/hemanshu-kaul) PhD Mathematics 
  
 ## Project Summary
 
